@@ -4,13 +4,20 @@ import kotlin.math.pow
 //triángulo (isósceles, escaleno o equilátero). Implementar el método .rectangulo():Boolean que
 //calcula si el triángulo es rectángulo.
 fun main(){
-    val triangulo1 = Triangulo(8.00, 6.00, 10.00, 24.00, "Rectangulo")
+    val triangulo1 = Triangulo(8.00, 6.00, 10.00)
+    println("Triangulo 1")
     println(triangulo1.toString())
     println("¿Es un triangulo rectangulo? ${triangulo1.esRectangulo()}")
-    val triangulo2 = Triangulo(10.00, 10.00, 10.00, 30.00, "Equilatero")
+    println("Su perimetro es ${triangulo1.perimetro()}")
+    println("Es ${triangulo1.tipo()}")
+    val triangulo2 = Triangulo(10.00, 10.00, 10.00)
+    println("Triangulo 2")
+    println(triangulo2.toString())
     println("¿Es un triangulo rectangulo? ${triangulo2.esRectangulo()}")
+    println("Su perimetro es ${triangulo2.perimetro()}")
+    println("Es ${triangulo2.tipo()}")
 }
-class Triangulo(var lado1: Double, var lado2: Double, var lado3: Double, var perimetro: Double, var tipo: String){
+class Triangulo(var lado1: Double, var lado2: Double, var lado3: Double){
 
     fun esRectangulo(): Boolean{
         val listaLados: List<Double> = listOf(lado1, lado2, lado3)
@@ -20,7 +27,18 @@ class Triangulo(var lado1: Double, var lado2: Double, var lado3: Double, var per
         return calculoTeoremaPitagorasDer == calculoTeoremaPitagorasIzq
     }
 
+    fun tipo(): String{
+        return when {
+            lado1 == lado2 && lado2 == lado3 -> "Equilátero"
+            lado1 == lado2 || lado2 == lado3 || lado1 == lado3 -> "Isósceles"
+            else -> "Escaleno"
+        }
+    }
+
+    fun perimetro(): Double = lado1 + lado2 + lado3
+
+
     override fun toString(): String {
-        return "Lados: $lado1, $lado2, $lado3\nPerimetro: $perimetro\nTipo: $tipo"
+        return "Lados: $lado1, $lado2, $lado3"
     }
 }
